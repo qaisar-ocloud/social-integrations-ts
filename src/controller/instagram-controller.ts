@@ -1,7 +1,8 @@
 import axios from "axios";
 import Token from "../model/token";
 import e from "express";
-import { ICustomRequest } from "../middleware/authMiddleware";
+import { ICustomRequest } from "../middleware/interfaces";
+
 
 export async function loginWithInstagram(req:ICustomRequest, res:e.Response) {
   try {

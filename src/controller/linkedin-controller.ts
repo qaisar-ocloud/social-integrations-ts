@@ -2,7 +2,8 @@ import Token from "../model/token";
 import axios from "axios";
 import { preparePostBody } from "../services/linkedin-service";
 import e from "express";
-import { ICustomRequest } from "../middleware/authMiddleware";
+import { ICustomRequest } from "../middleware/interfaces";
+
 
 export async function loginWithLinkedin(req:ICustomRequest, res:e.Response) {
   try {

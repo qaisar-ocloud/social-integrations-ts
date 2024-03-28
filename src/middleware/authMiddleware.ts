@@ -1,10 +1,9 @@
 import jwt from "jsonwebtoken";
 import User from "../model/user";
 import e from "express";
+import { ICustomRequest } from "./interfaces";
 
-export interface ICustomRequest extends e.Request {
-  user?: any; 
-}
+
 
 export default async function authenticate(req:e.Request, res:e.Response, next:e.NextFunction) {
   try {

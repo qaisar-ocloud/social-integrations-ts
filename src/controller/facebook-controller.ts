@@ -7,7 +7,8 @@ import {
   prepareMutationForFbGraphql,
 } from "../services/facebook-service";
 import e from "express";
-import { ICustomRequest } from "../middleware/authMiddleware";
+import { ICustomRequest } from "../middleware/interfaces";
+
 
 export async function getMyFacebookToken(req:ICustomRequest, res:e.Response) {
   try {
@@ -44,15 +45,13 @@ export async function catchFacebookRedirect(req:e.Request, res:e.Response) {
     );
 
     const { access_token, token_type } = data;
-    const { data: temp } = await validateFacebookToken(access_token);
+    const { data: extendedToken } = await validateFacebookToken(access_token);
 
     const {
       data_access_expires_at,
       scopes: permission,
       user_id: fbUserID,
-    } = temp;
-
-    const currentTime = Date.now();
+    } = extendedToken;
 
     await Token.create({
       access_token: access_token,

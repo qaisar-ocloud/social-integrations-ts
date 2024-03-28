@@ -6,14 +6,15 @@ import { postToFacebook } from "../services/facebook-service";
 import { postToLinkedIn } from "../services/linkedin-service";
 import { postToInstagram } from "../services/instagram-service";
 import e from "express";
-import { ICustomRequest } from "../middleware/authMiddleware";
+import { ICustomRequest } from "../middleware/interfaces";
+
 export async function createSocialPostWIthMany(req:ICustomRequest, res:e.Response) {
   const { platforms, text, published, scheduledAfter: scheduled_at } = req.body;
   const file = !req.file ? null : req.file;
   const image_url:any = file ? await fileUpload(file?.path) : null;
 
   try {
-    const tokenPromises = platforms
+    const tokenPromises:any = platforms
       .split(",")
       ?.map((item:any) => Token.findOne({ platform: item }));
 
